@@ -16,8 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
-    QLabel, QMainWindow, QPushButton, QSizePolicy,
-    QSpacerItem, QStackedWidget, QVBoxLayout, QWidget)
+    QLabel, QListWidget, QListWidgetItem, QMainWindow,
+    QPushButton, QSizePolicy, QSpacerItem, QStackedWidget,
+    QVBoxLayout, QWidget)
 import gui.res
 
 class Ui_MainWindow(object):
@@ -299,6 +300,8 @@ class Ui_MainWindow(object):
         self.main_menu.setFrameShadow(QFrame.Raised)
         self.gridLayout = QGridLayout(self.main_menu)
         self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setVerticalSpacing(7)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.stackedWidget = QStackedWidget(self.main_menu)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setMinimumSize(QSize(400, 0))
@@ -307,11 +310,48 @@ class Ui_MainWindow(object):
         self.income_page.setObjectName(u"income_page")
         self.verticalLayout_5 = QVBoxLayout(self.income_page)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 7, -1)
         self.income_frame = QFrame(self.income_page)
         self.income_frame.setObjectName(u"income_frame")
         self.income_frame.setMinimumSize(QSize(0, 480))
         self.income_frame.setFrameShape(QFrame.StyledPanel)
         self.income_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_5 = QHBoxLayout(self.income_frame)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.income_list = QListWidget(self.income_frame)
+        self.income_list.setObjectName(u"income_list")
+        self.income_list.setStyleSheet(u"QListWidget:item{\n"
+"	background-color: rgb(0, 205, 165);\n"
+"	height: 60px;\n"
+"	border-radius: 30px;\n"
+"	border: 1px solid black;\n"
+"	padding-left: 40%;\n"
+"	margin-bottom: 10px;\n"
+"	margin-right:35px;\n"
+"}\n"
+"QListWidget{\n"
+"	margin-left:30px;\n"
+"	padding-top: 20px;\n"
+"	padding-bottom: 20px;\n"
+"	font-size: 26px;\n"
+"	font-family: Bahnschrift;\n"
+"	border: none;\n"
+"}\n"
+"QScrollBar:vertical {\n"
+"    border: 2px solid black;\n"
+"    background: rgb(0, 205, 165);\n"
+"    width: 15px;\n"
+"	border-radius: 15px;\n"
+"\n"
+"}\n"
+"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical{\n"
+"	border: none;\n"
+"	height: 0px;\n"
+"}")
+
+        self.horizontalLayout_5.addWidget(self.income_list)
+
 
         self.verticalLayout_5.addWidget(self.income_frame)
 
@@ -378,11 +418,48 @@ class Ui_MainWindow(object):
         self.cars_page.setObjectName(u"cars_page")
         self.verticalLayout_6 = QVBoxLayout(self.cars_page)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalLayout_6.setContentsMargins(0, 0, 7, -1)
         self.cars_frame = QFrame(self.cars_page)
         self.cars_frame.setObjectName(u"cars_frame")
         self.cars_frame.setMinimumSize(QSize(0, 480))
         self.cars_frame.setFrameShape(QFrame.StyledPanel)
         self.cars_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_6 = QHBoxLayout(self.cars_frame)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.cars_list = QListWidget(self.cars_frame)
+        self.cars_list.setObjectName(u"cars_list")
+        self.cars_list.setStyleSheet(u"QListWidget:item{\n"
+"	background-color: rgb(0, 205, 165);\n"
+"	height: 60px;\n"
+"	border-radius: 30px;\n"
+"	border: 1px solid black;\n"
+"	padding-left: 40%;\n"
+"	margin-bottom: 10px;\n"
+"	margin-right:35px;\n"
+"}\n"
+"QListWidget{\n"
+"	margin-left:30px;\n"
+"	padding-top: 20px;\n"
+"	padding-bottom: 20px;\n"
+"	font-size: 26px;\n"
+"	font-family: Bahnschrift;\n"
+"	border: none;\n"
+"}\n"
+"QScrollBar:vertical {\n"
+"    border: 2px solid black;\n"
+"    background: rgb(0, 205, 165);\n"
+"    width: 15px;\n"
+"	border-radius: 15px;\n"
+"\n"
+"}\n"
+"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical{\n"
+"	border: none;\n"
+"	height: 0px;\n"
+"}")
+
+        self.horizontalLayout_6.addWidget(self.cars_list)
+
 
         self.verticalLayout_6.addWidget(self.cars_frame)
 
