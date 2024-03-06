@@ -18,6 +18,7 @@ class ConnectToDB:
         if not query.exec("""
                         CREATE TABLE IF NOT EXISTS cars(
                             id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            date_of_added DATE,
                             name TEXT)
                           """):
             return False
@@ -26,6 +27,7 @@ class ConnectToDB:
         
         if not query.exec("""
                           CREATE TABLE IF NOT EXISTS income(
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
                             car_id INTEGER,
                             amount_profit INTEGER,
                             hours_quantity INTEGER,
