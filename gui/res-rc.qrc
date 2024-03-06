@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="black-icons">
+    <file>icons/arrow_back.svg</file>
+    <file>icons/arrow_forward.svg</file>
+    <file>icons/cancel.svg</file>
+    <file>icons/cars.svg</file>
+    <file>icons/done.svg</file>
+    <file>icons/exit.svg</file>
+    <file>icons/logo.svg</file>
+    <file>icons/menu.svg</file>
+    <file>icons/monitoring.svg</file>
+    <file>icons/savings.svg</file>
+    <file>icons/settings.svg</file>
+  </qresource>
+  <qresource prefix="color-icons">
+    <file>icons/cars-color.svg</file>
+    <file>icons/monitoring-color.svg</file>
+    <file>icons/savings-color.svg</file>
+    <file>icons/settings-color.svg</file>
+  </qresource>
+  <qresource prefix="logo">
+    <file>icons/icon.png</file>
+  </qresource>
+</RCC>
