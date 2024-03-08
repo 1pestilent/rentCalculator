@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QMainWindow
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QIntValidator
 from gui.mainwindow import Ui_MainWindow
 from gui.addcar import Ui_AddCar
 from gui.addincome import Ui_AddIncome
@@ -27,6 +28,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.connect = ConnectToDB()
 
+        self.intValidator = QIntValidator()
+
         if not self.connect.tables():
             print('Table not created :(')
             self.connect.closeConnection()
@@ -46,6 +49,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def income_page_open(self):
         self.stackedWidget.setCurrentWidget(self.income_page)
+        self.refresh_income_list()
 
     def cars_page_open(self):
         self.stackedWidget.setCurrentWidget(self.cars_page)
@@ -57,25 +61,45 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.addCarWindow.car_name_add_button.clicked.connect(self.add_car)
         self.addCarWindow.show()
 
-    def refresh_car_list(self):
-        cars = self.connect.get_car_list()
-        for car in cars:
-            exists = False
-            for i in range(self.cars_list.count()):
-                item = self.cars_list.item(i)
-                if item.text() == car:
-                    exists = True
-                    break
-            if not exists:
-                self.cars_list.addItem(car)
-
     def open_add_income_window(self):
         self.addIncomeWindow = AddIncomeWindow()
+        self.addIncomeWindow.time_income_edit.setMaxLength(2)
+        self.addIncomeWindow.time_income_edit.setValidator(self.intValidator)
+        self.addIncomeWindow.income_income_edit.setMaxLength(6)
+        self.addIncomeWindow.income_income_edit.setValidator(self.intValidator)
         cars = self.connect.get_car_list()
         for car in cars:
             self.addIncomeWindow.cars_combobox.addItem(car)
         self.addIncomeWindow.add_income_button.clicked.connect(self.add_income)
         self.addIncomeWindow.show()
+
+    def refresh_car_list(self):
+        cars = self.connect.get_car_list()
+        form = ''
+        for car in cars:
+            exists = False
+            form = '[ID'+str(car[0])+' '+str(car[1])+'] '+str(car[2])
+            for i in range(self.cars_list.count()):
+                item = self.cars_list.item(i)
+                if item.text() == form:
+                    exists = True
+                    break
+            if not exists:
+                self.cars_list.addItem(form)
+
+    def refresh_income_list(self):
+        income_list = self.connect.get_income_list()
+        form = ''
+        for income in income_list:
+            exists = False
+            form = '[ID'+str(income[0])+'] '+str(income[1])+' '+str(income[2])+'$['+str(income[3])+'] '+str(income[4])
+            for i in range(self.income_list.count()):
+                item = self.income_list.item(i)
+                if item.text() == form:
+                    exists = True
+                    break
+            if not exists:
+                self.income_list.addItem(form)
 
     def add_car(self):
         carname = self.addCarWindow.car_name_edit.text().strip()
@@ -93,7 +117,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         hours = self.addIncomeWindow.time_income_edit.text()
         car_id = self.connect.get_car_id(car_name)
         if self.connect.add_income_in_db(car_id, income, hours):
-            print('Income was added in table')
+            self.refresh_income_list()
             self.addIncomeWindow.close()
 
     

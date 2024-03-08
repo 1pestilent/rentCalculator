@@ -43,7 +43,6 @@ class ConnectToDB:
     
     def add_car_in_db(self,carname):
         current_date = QDate.currentDate()
-        print(current_date.toString('yyyy-MM-dd'))
         query = QSqlQuery()
         query.prepare('INSERT INTO cars(name, date_of_added) VALUES (?, ?)')
         query.bindValue(0,carname)
@@ -57,7 +56,6 @@ class ConnectToDB:
 
     def add_income_in_db(self, car_id, income, hours):
         current_date = QDate.currentDate().toString('yyyy-MM-dd')
-        print(car_id, income, hours, current_date)
         query = QSqlQuery()
         query.prepare('INSERT INTO income(car_id, amount_profit, hours_quantity, rent_day) VALUES (?, ?, ?, ?)')
         query.bindValue(0,car_id)
@@ -65,7 +63,7 @@ class ConnectToDB:
         query.bindValue(2,hours)
         query.bindValue(3,current_date)
         if not query.exec_():
-            print(query.lastError().text())
+            print("Error executing query:", query.lastError().text())
             return False
         else:
             query.finish()
@@ -74,16 +72,36 @@ class ConnectToDB:
     def get_car_list(self):
         car_list=[]
         query = QSqlQuery()
-        query.prepare('SELECT name FROM cars')
+        query.prepare('SELECT * FROM cars')
         if query.exec():
             while query.next():
-                car_name = query.value(0)
-                car_list.append(car_name)
+                id = query.value(0)
+                name = query.value(1)
+                date = query.value(2)
+                car_list.append((id,name,date))
         else:
             print("Error executing query:", query.lastError().text())
         print(car_list)
         query.finish()  
         return car_list
+    
+    def get_income_list(self):
+        income_list = []
+        query = QSqlQuery()
+        query.prepare("""SELECT income.id, cars.name, income.amount_profit, income.hours_quantity, income.rent_day FROM income
+                      JOIN cars ON income.car_id = cars.id""")
+        if query.exec():
+            while query.next():
+                id = query.value(0)
+                car_id = query.value(1)
+                amount_profit = query.value(2)
+                hours_quantity = query.value(3)
+                rent_day = query.value(4)
+                income_list.append((id,car_id, amount_profit, hours_quantity,rent_day))
+        else:
+            print("Error executing query:", query.lastError().text())
+        query.finish()
+        return income_list
     
     def get_car_id(self, car_name):
         conn = sqlite3.connect('dates.db')
