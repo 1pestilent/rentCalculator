@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="icon-color">
+    <file>fonts/Futura.ttf</file>
+    <file>icons/settings.svg</file>
+    <file>icons/menu.svg</file>
+    <file>icons/analysis.svg</file>
+    <file>icons/arrow_close.svg</file>
+    <file>icons/arrow_open.svg</file>
+    <file>icons/cars.svg</file>
+    <file>icons/close.svg</file>
+    <file>icons/close_fullscreen.svg</file>
+    <file>icons/fullscreen.svg</file>
+    <file>icons/minimize.svg</file>
+    <file>icons/money.svg</file>
+  </qresource>
+</RCC>

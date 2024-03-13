@@ -1,9 +1,10 @@
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication
 from mainwin import MainWindow
 import sys
 
-if __name__=='__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
+    win = MainWindow()
+    win.show()
     app.exec()
+    

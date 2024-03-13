@@ -1,5 +1,6 @@
 from PySide6.QtCore import QDate
 from PySide6.QtSql import QSqlDatabase, QSqlQuery
+import datetime
 import sqlite3
 
 class ConnectToDB:
@@ -19,8 +20,8 @@ class ConnectToDB:
         if not query.exec("""
                         CREATE TABLE IF NOT EXISTS cars(
                             id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            date_of_added DATE,
-                            name TEXT UNIQUE)
+                            name TEXT UNIQUE,
+                            date_of_added DATE DEFAULT CURRENT_DATE)
                           """):
             return False
         else:
@@ -32,91 +33,109 @@ class ConnectToDB:
                             car_id INTEGER,
                             amount_profit INTEGER,
                             hours_quantity INTEGER,
-                            rent_day DATE,
+                            rent_day DATE DEFAULT CURRENT_DATE,
                             FOREIGN KEY(car_id) REFERENCES cars(id))
                           """):
             return False
-        else:
-            print('Table with income was created!')
-        
+        if not query.exec("""CREATE TABLE IF NOT EXISTS resale(
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            info TEXT,
+                            profit INTEGER,
+                            timedate TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+                          """):
+            return False
         return True
     
-    def add_car_in_db(self,carname):
-        current_date = QDate.currentDate()
+    def add_resale(self,info,profit):
         query = QSqlQuery()
-        query.prepare('INSERT INTO cars(name, date_of_added) VALUES (?, ?)')
-        query.bindValue(0,carname)
-        query.bindValue(1,current_date.toString('yyyy-MM-dd'))
+        query.prepare('INSERT INTO resale(info, profit) VALUES (?, ?)')
+        query.bindValue(0,info)
+        query.bindValue(1,profit)
         if not query.exec():
             print(query.lastError().text())
             return False
         else:
             query.finish()
             return True
-
-    def add_income_in_db(self, car_id, income, hours):
-        current_date = QDate.currentDate().toString('yyyy-MM-dd')
-        query = QSqlQuery()
-        query.prepare('INSERT INTO income(car_id, amount_profit, hours_quantity, rent_day) VALUES (?, ?, ?, ?)')
-        query.bindValue(0,car_id)
-        query.bindValue(1,income)
-        query.bindValue(2,hours)
-        query.bindValue(3,current_date)
-        if not query.exec_():
-            print("Error executing query:", query.lastError().text())
-            return False
-        else:
-            query.finish()
-            return True
         
-    def get_car_list(self):
-        car_list=[]
+    def get_last_resales(self):
+        last_resales_list = []
         query = QSqlQuery()
-        query.prepare('SELECT * FROM cars')
+        query.prepare('SELECT info, profit, timedate FROM resale ORDER BY id DESC LIMIT 8;')
         if query.exec():
             while query.next():
-                id = query.value(0)
-                name = query.value(1)
-                date = query.value(2)
-                car_list.append((id,name,date))
-        else:
-            print("Error executing query:", query.lastError().text())
-        print(car_list)
-        query.finish()  
-        return car_list
-    
-    def get_income_list(self):
-        income_list = []
-        query = QSqlQuery()
-        query.prepare("""SELECT income.id, cars.name, income.amount_profit, income.hours_quantity, income.rent_day FROM income
-                      JOIN cars ON income.car_id = cars.id""")
-        if query.exec():
-            while query.next():
-                id = query.value(0)
-                car_id = query.value(1)
-                amount_profit = query.value(2)
-                hours_quantity = query.value(3)
-                rent_day = query.value(4)
-                income_list.append((id,car_id, amount_profit, hours_quantity,rent_day))
+                info = query.value(0)
+                profit = query.value(1)
+                timestamp = query.value(2)
+                time = datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S').time().strftime('%H:%M:%S')
+                last_resales_list.append((info, profit, time))
         else:
             print("Error executing query:", query.lastError().text())
         query.finish()
-        return income_list
+        return last_resales_list
     
-    def get_car_id(self, car_name):
-        conn = sqlite3.connect('dates.db')
-        cursor = conn.cursor()
-        cursor.execute(f"SELECT id FROM cars WHERE name = ?", (car_name,))
-        car_id = cursor.fetchone()
-        conn.close()
-        if car_id:
-            return car_id[0]
+    def get_total_profit(self):
+        total_profit = ''
+        query = QSqlQuery()
+        query.prepare('SELECT SUM(profit) FROM resale;')
+        if query.exec():
+            while query.next():
+                total_profit = query.value(0)
+                query.finish()
+            return total_profit
         else:
-            print('Car id - empty')
-            return None
+            print("Error executing query:", query.lastError().text())
 
+    def resale_reset(self):
+        query = QSqlQuery()
+        query.prepare('DELETE FROM resale;')
+        if not query.exec():
+            print("Error executing query:", query.lastError().text())
+            return False
+        else:
+            print('Resale has been reseted.')
+            return True
+        
+    def new_point(self):
+        query = QSqlQuery()
+        query.prepare('INSERT INTO resale(info,profit) VALUES(?, ?)')
+        query.bindValue(0,'НОВАЯ СЕРИЯ')
+        query.bindValue(1, '0')
+        if not query.exec():
+            print("Error executing query:", query.lastError().text())
+            return False
+        else:
+            print('New point created...')
+            return True
+        
+    def get_max_id_from_point(self):
+        max_id = 0
+        connection = sqlite3.connect("dates.db")
+        cursor = connection.cursor()
+        cursor.execute('SELECT id FROM resale WHERE info = ?', ("НОВАЯ СЕРИЯ",))
+        result = cursor.fetchone()
+        cursor.close()
+        connection.close()
+        if result is not None:
+            max_id = result[0]
+            return max_id
+        else: 
+            return max_id
+        
 
+        
+    def get_profit_from_last_point(self):
+        profit = 0
+        max_id = self.get_max_id_from_point()
+        connection = sqlite3.connect("dates.db")
+        cursor = connection.cursor()
+        cursor.execute('SELECT SUM(profit) FROM resale WHERE id > ?', (max_id,))
+        result = cursor.fetchone()
+        cursor.close()
+        connection.close()
+        if result is not None:
+            profit = result[0]
+            return profit
+        else:
+            return 0
 
-    def closeConnection(self):
-        self.db.close()
-        print('Соединение закрыто')

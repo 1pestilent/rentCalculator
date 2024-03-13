@@ -1,25 +1,9 @@
+from gui.mainwindow import Ui_MainWindow
+from db import ConnectToDB
+from profit_frame import profitNote
 from PySide6.QtWidgets import QMainWindow
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QIntValidator
-from gui.mainwindow import Ui_MainWindow
-from gui.addcar import Ui_AddCar
-from gui.addincome import Ui_AddIncome
-from db import ConnectToDB
-
-
-class AddCarWindow(QMainWindow, Ui_AddCar):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.car_name_cancel_button.clicked.connect(self.close)
-
-
-class AddIncomeWindow(QMainWindow, Ui_AddIncome):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.cancel_income_button.clicked.connect(self.close)
-
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -27,97 +11,101 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.connect = ConnectToDB()
+        self.connect.tables()
 
-        self.intValidator = QIntValidator()
+        int_validator = QIntValidator()
+        self.resale_profit_edit.setValidator(int_validator)
 
-        if not self.connect.tables():
-            print('Table not created :(')
-            self.connect.closeConnection()
-        else:
-            print('Table has been created :)')
-            self.connect.closeConnection
+        self.setWindowFlag(Qt.FramelessWindowHint)
 
-        self.icon_name_widget.hide()
-        self.income_button.clicked.connect(self.income_page_open)
-        self.fincome_button.clicked.connect(self.income_page_open)
-        self.cars_button.clicked.connect(self.cars_page_open)
-        self.fcars_button.clicked.connect(self.cars_page_open)
+        self.resale_button.clicked.connect(self.open_resale_page)
+        self.cars_button.clicked.connect(self.open_cars_page)
+        self.header.mouseMoveEvent = self.moveWindow
+        self.resale_add_button.clicked.connect(self.add_resale_profit_in_db)
+        self.resale_reset_button.clicked.connect(self.resale_reset)
+        self.resale_new_button.clicked.connect(self.interim_profit)
 
-        self.cars_add.clicked.connect(self.open_add_car_window)
-        self.income_add_button.clicked.connect(self.open_add_income_window)
+        self.add_notes()
+        self.resale_button.click()
 
+    def open_resale_page(self):
+        self.stackedWidget.setCurrentWidget(self.resale_page)
 
-    def income_page_open(self):
-        self.stackedWidget.setCurrentWidget(self.income_page)
-        self.refresh_income_list()
+    def open_cars_page(self):
+        self.stackedWidget.setCurrentWidget(self.cars_page)    
 
-    def cars_page_open(self):
-        self.stackedWidget.setCurrentWidget(self.cars_page)
-        self.refresh_car_list()
+    def moveWindow(self, event):
+        self.move(self.pos() + event.globalPos() - self.clickPosition)
+        self.clickPosition = event.globalPos()
+        event.accept()
+        pass
+        
+    def mousePressEvent(self, event):
+        self.clickPosition = event.globalPos()
+        pass
 
+    def add_resale_profit_in_db(self):
+        name = self.resale_name_edit.text().strip()
+        profit = int(self.resale_profit_edit.text().strip())
+        if not name == '' or profit == '':
+            if self.connect.add_resale(name,profit):
+                self.add_notes()
+                print('Resale add in db')
 
-    def open_add_car_window(self):
-        self.addCarWindow = AddCarWindow()
-        self.addCarWindow.car_name_add_button.clicked.connect(self.add_car)
-        self.addCarWindow.show()
+    def add_notes(self):
+        if self.connect.get_total_profit():
+            total_profit = self.connect.get_total_profit()
+            total_profit = '{:,.0f}'.format(total_profit).replace(',', '.')
+            self.resale_total_profit_label.setText(f'{total_profit}$')
+        if self.connect.get_profit_from_last_point():
+            seria_profit = self.connect.get_profit_from_last_point()
+            seria_profit = '{:,.0f}'.format(seria_profit).replace(',', '.')
+            self.resale_profit_label.setText(f'{seria_profit}$')
+        while self.resale_story_layout.count():
+            widget = self.resale_story_layout.itemAt(0).widget()
+            if widget:
+                self.resale_story_layout.removeWidget(widget)
+                widget.deleteLater()
+        if self.connect.get_last_resales():
+            last_resales = self.connect.get_last_resales()
+            for resale in last_resales:
+                note = profitNote()
+                profit = resale[1]
+                if resale[0] == 'НОВАЯ СЕРИЯ':
+                    note.profit.setText('$')
+                    note.setStyleSheet('QFrame{background-color: rgb(85, 85, 85);border-radius:15px;border: 2px solid white;}QLabel{color: rgb(255, 255, 255);font-size: 12px;border:none;font-family: Impact;}')
+                elif profit >= 0:
+                    profit = '{:,.0f}'.format(profit).replace(',', '.')
+                    note.profit.setText(f'{str(profit)}$')
+                    note.setStyleSheet('QFrame{background-color: rgb(85, 85, 85);border-radius:15px;border: 2px solid green;}QLabel{color: rgb(255, 255, 255);font-size: 12px;border:none;font-family: Impact;}')
+                else:
+                    profit = '{:,.0f}'.format(profit).replace(',', '.')
+                    note.profit.setText(f'{str(profit)}$')
+                    note.setStyleSheet('QFrame{background-color: rgb(85, 85, 85);border-radius:15px;border: 2px solid red;}QLabel{color: rgb(255, 255, 255);font-size: 12px;border:none;font-family: Impact;}')
+                note.profit_name.setText(resale[0])
+                note.time.setText(resale[2])
+                if self.resale_story_layout.count() >= 8:
+                    self.resale_story_layout.removeWidget(self.resale_story_layout.itemAt(0).widget())
+                    self.resale_story_layout.insertWidget(7,note)
+                else:
+                    self.resale_story_layout.addWidget(note)
+            self.resale_name_edit.clear()
+            self.resale_profit_edit.clear()
 
-    def open_add_income_window(self):
-        self.addIncomeWindow = AddIncomeWindow()
-        self.addIncomeWindow.time_income_edit.setMaxLength(2)
-        self.addIncomeWindow.time_income_edit.setValidator(self.intValidator)
-        self.addIncomeWindow.income_income_edit.setMaxLength(6)
-        self.addIncomeWindow.income_income_edit.setValidator(self.intValidator)
-        cars = self.connect.get_car_list()
-        for car in cars:
-            self.addIncomeWindow.cars_combobox.addItem(car)
-        self.addIncomeWindow.add_income_button.clicked.connect(self.add_income)
-        self.addIncomeWindow.show()
+    def interim_profit(self):
+        if self.connect.new_point():
+            self.add_notes()
+            self.resale_profit_label.setText('0$')
 
-    def refresh_car_list(self):
-        cars = self.connect.get_car_list()
-        form = ''
-        for car in cars:
-            exists = False
-            form = '[ID'+str(car[0])+' '+str(car[1])+'] '+str(car[2])
-            for i in range(self.cars_list.count()):
-                item = self.cars_list.item(i)
-                if item.text() == form:
-                    exists = True
-                    break
-            if not exists:
-                self.cars_list.addItem(form)
+    def resale_reset(self):
+        if self.connect.resale_reset():
+            self.clear_resale_story()
+            self.resale_profit_label.setText('0$')
+            self.resale_total_profit_label.setText('0$')
 
-    def refresh_income_list(self):
-        income_list = self.connect.get_income_list()
-        form = ''
-        for income in income_list:
-            exists = False
-            form = '[ID'+str(income[0])+'] '+str(income[1])+' '+str(income[2])+'$['+str(income[3])+'] '+str(income[4])
-            for i in range(self.income_list.count()):
-                item = self.income_list.item(i)
-                if item.text() == form:
-                    exists = True
-                    break
-            if not exists:
-                self.income_list.addItem(form)
-
-    def add_car(self):
-        carname = self.addCarWindow.car_name_edit.text().strip()
-        if not carname == '':  
-            if self.connect.add_car_in_db(carname):
-                print('Add new line in table(cars)')
-                self.addCarWindow.close()
-                self.refresh_car_list()
-        else:
-            print('Поля ввода пустое!')
-
-    def add_income(self):
-        car_name = self.addIncomeWindow.cars_combobox.currentText().strip()
-        income = self.addIncomeWindow.income_income_edit.text()
-        hours = self.addIncomeWindow.time_income_edit.text()
-        car_id = self.connect.get_car_id(car_name)
-        if self.connect.add_income_in_db(car_id, income, hours):
-            self.refresh_income_list()
-            self.addIncomeWindow.close()
-
-    
+    def clear_resale_story(self):
+            while self.resale_story_layout.count():
+                widget = self.resale_story_layout.itemAt(0).widget()
+                if widget:
+                    self.resale_story_layout.removeWidget(widget)
+                    widget.deleteLater()
