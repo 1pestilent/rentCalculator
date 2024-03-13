@@ -15,16 +15,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         int_validator = QIntValidator()
         self.resale_profit_edit.setValidator(int_validator)
+        self.cars_profit_edit.setValidator(int_validator)
+        self.cars_profit_edit.setMaxLength(6)
+        self.cars_hours_edit.setValidator(int_validator)
+        self.cars_hours_edit.setMaxLength(2)
 
         self.setWindowFlag(Qt.FramelessWindowHint)
 
         self.resale_button.clicked.connect(self.open_resale_page)
         self.cars_button.clicked.connect(self.open_cars_page)
+
         self.header.mouseMoveEvent = self.moveWindow
+
         self.resale_add_button.clicked.connect(self.add_resale_profit_in_db)
         self.resale_reset_button.clicked.connect(self.resale_reset)
         self.resale_new_button.clicked.connect(self.interim_profit)
 
+        self.cars_addcar_button.clicked.connect(self.add_car)
+        self.cars_addincome_button.clicked.connect(self.add_rent_profit)
+        
+        self.refresh_car_page()
+        self.refresh_carcombo()
         self.add_notes()
         self.resale_button.click()
 
@@ -109,3 +120,48 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 if widget:
                     self.resale_story_layout.removeWidget(widget)
                     widget.deleteLater()
+
+    def add_car(self):
+        carname = self.cars_carname_edit.text().strip()
+        print(carname)
+        if self.connect.add_car(carname):
+            self.refresh_carcombo()
+            self.cars_carname_edit.clear()
+            
+    def refresh_carcombo(self):
+        self.cars_car_combo.clear()
+        if self.connect.get_car_list():
+            car_list = self.connect.get_car_list()
+            for car in car_list:
+                self.cars_car_combo.addItem(f'[ID{car[0]}] {car[1]}')
+                
+    def add_rent_profit(self):
+        id = self.cars_car_combo.currentText().split('[ID')[-1].split(']')[0]
+        profit = self.cars_profit_edit.text()
+        hours = self.cars_hours_edit.text()
+        print(id, profit, hours)
+        if self.connect.add_rent_profit(id, profit, hours):
+            self.refresh_car_page()
+    
+    def refresh_car_page(self):
+        while self.cars_story_layout.count():
+            widget = self.cars_story_layout.itemAt(0).widget()
+            if widget:
+                self.cars_story_layout.removeWidget(widget)
+                widget.deleteLater()
+        if self.connect.get_last_car_profit():
+            car_profits = self.connect.get_last_car_profit()
+            for car_profit in car_profits:
+                profit = '{:,.0f}'.format(car_profit[1]).replace(',', '.')
+                note = profitNote()
+                note.profit.setText(f'{profit}$ ({car_profit[2]})')
+                note.profit_name.setText(f'{car_profit[0]}')
+                note.time.setText(car_profit[3])
+                if self.cars_story_layout.count() >= 8:
+                    self.cars_story_layout.removeWidget(self.cars_story_layout.itemAt(0).widget())
+                    self.cars_story_layout.insertWidget(7,note)
+                else:
+                    self.cars_story_layout.addWidget(note)
+            self.cars_profit_edit.clear()
+            self.cars_hours_edit.clear()
+

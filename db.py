@@ -10,8 +10,6 @@ class ConnectToDB:
     
         if not self.db.open():
             print('Connection failed')
-        else:
-            print('Successful connection')
 
     
     def tables(self):
@@ -24,9 +22,6 @@ class ConnectToDB:
                             date_of_added DATE DEFAULT CURRENT_DATE)
                           """):
             return False
-        else:
-            print('Table with cars was created!')
-        
         if not query.exec("""
                           CREATE TABLE IF NOT EXISTS income(
                             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -93,7 +88,7 @@ class ConnectToDB:
             print("Error executing query:", query.lastError().text())
             return False
         else:
-            print('Resale has been reseted.')
+            print('All resale entries have been deleted.')
             return True
         
     def new_point(self):
@@ -122,8 +117,6 @@ class ConnectToDB:
         else: 
             return max_id
         
-
-        
     def get_profit_from_last_point(self):
         profit = 0
         max_id = self.get_max_id_from_point()
@@ -139,3 +132,59 @@ class ConnectToDB:
         else:
             return 0
 
+    def add_car(self, carname):
+        query = QSqlQuery()
+        query.prepare('INSERT INTO cars(name) VALUES (?)')
+        query.bindValue(0, carname)
+        if not query.exec():
+            print(f'Adding car - error: {query.lastError().text()}')
+            return False
+        else:
+            query.finish()
+            print(f'{carname} has been added.')
+            return True
+
+    def get_car_list(self):
+        car_list = []
+        query = QSqlQuery()
+        query.prepare('SELECT * FROM cars')
+        if query.exec():
+            while query.next():
+                id = query.value(0)
+                car = query.value(1)
+                date = query.value(2)
+                car_list.append((id,car,date))
+            return car_list
+        else:
+            print(f'Getting car list - error: {query.lastError().text()}')          
+
+    def add_rent_profit(self, car_id, profit, hours):
+        query = QSqlQuery()
+        query.prepare('INSERT INTO income(car_id,amount_profit,hours_quantity) VALUES (?,?,?)')
+        query.bindValue(0, int(car_id))
+        query.bindValue(1, int(profit))
+        query.bindValue(2, int(hours))
+        if not query.exec():
+            print(f'Adding profit from rent - error: {query.lastError().text()}')
+            return False
+        else:
+            query.finish()
+            print(f'Profit {profit}({hours}) has been added.')
+            return True
+
+    def get_last_car_profit(self):
+        last_car_profit = []
+        query = QSqlQuery()
+        query.prepare('SELECT cars.name, income.amount_profit, income.hours_quantity, income.rent_day FROM income JOIN cars ON income.car_id = cars.id ORDER BY income.id DESC LIMIT 8;')
+        if query.exec():
+            while query.next():
+                car_id = query.value(0)
+                profit = query.value(1)
+                hours = query.value(2)
+                date_str = query.value(3)
+                date = datetime.datetime.strptime(date_str, '%Y-%m-%d').strftime('%d.%m')
+                last_car_profit.append((car_id, profit, hours, date))
+        else:
+            print("Getting last profit from cars - error: ", query.lastError().text())
+        query.finish()
+        return last_car_profit

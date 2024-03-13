@@ -361,7 +361,7 @@ class Ui_MainWindow(object):
         self.cars_page.setObjectName(u"cars_page")
         self.frame = QFrame(self.cars_page)
         self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(90, 70, 411, 211))
+        self.frame.setGeometry(QRect(70, 60, 411, 211))
         self.frame.setStyleSheet(u"QFrame{	\n"
 "	background-color: rgb(50, 50, 50);\n"
 "	border-radius: 5px;\n"
@@ -403,12 +403,19 @@ class Ui_MainWindow(object):
         self.cars_car_combo.setObjectName(u"cars_car_combo")
         self.cars_car_combo.setMinimumSize(QSize(0, 40))
         self.cars_car_combo.setStyleSheet(u"QComboBox{\n"
-"	font-size: 18px; \n"
-"	font-family: Bahnschrift;\n"
+"	font-size: 20px; \n"
+"	font-family: Impact;\n"
 "	height: 35px;\n"
 "	border-radius: 10px;\n"
 "	background-color: rgb(85, 85, 85);\n"
+"	color: white;	\n"
+"}\n"
+"QComboBox QAbstractItemView{\n"
 "	color: white;\n"
+"    selection-background-color: rgb(100,100,100);\n"
+"}\n"
+"QComboBox QAbstractItemView::item:hover{\n"
+"	border: 1px solid white;\n"
 "}\n"
 "QComboBox::down-arrow {\n"
 "	border:none;\n"
@@ -469,7 +476,7 @@ class Ui_MainWindow(object):
 
         self.frame_3 = QFrame(self.cars_page)
         self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setGeometry(QRect(90, 330, 411, 151))
+        self.frame_3.setGeometry(QRect(70, 330, 411, 151))
         self.frame_3.setStyleSheet(u"QFrame{	\n"
 "	background-color: rgb(50, 50, 50);\n"
 "	border-radius: 5px;\n"
@@ -526,7 +533,7 @@ class Ui_MainWindow(object):
 
         self.cars_story_frame = QFrame(self.cars_page)
         self.cars_story_frame.setObjectName(u"cars_story_frame")
-        self.cars_story_frame.setGeometry(QRect(600, 20, 411, 521))
+        self.cars_story_frame.setGeometry(QRect(580, 20, 431, 521))
         self.cars_story_frame.setStyleSheet(u"QFrame{\n"
 "	background-color: rgb(50, 50, 50);\n"
 "	border-radius: 5px;\n"
@@ -555,7 +562,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.close_button.clicked.connect(MainWindow.close)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
