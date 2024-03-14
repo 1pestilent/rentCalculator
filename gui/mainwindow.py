@@ -105,7 +105,6 @@ class Ui_MainWindow(object):
         self.menubar.setMinimumSize(QSize(70, 0))
         self.menubar.setMaximumSize(QSize(70, 16777215))
         self.menubar.setStyleSheet(u"QPushButton:checked{\n"
-"	color: white;\n"
 "	background-color: rgb(70, 70, 70);\n"
 "}\n"
 "QPushButton{\n"
@@ -548,6 +547,595 @@ class Ui_MainWindow(object):
         self.verticalLayout_12.addLayout(self.cars_story_layout)
 
         self.stackedWidget.addWidget(self.cars_page)
+        self.analyse_page = QWidget()
+        self.analyse_page.setObjectName(u"analyse_page")
+        self.verticalLayout_8 = QVBoxLayout(self.analyse_page)
+        self.verticalLayout_8.setSpacing(0)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.analyse_header = QFrame(self.analyse_page)
+        self.analyse_header.setObjectName(u"analyse_header")
+        self.analyse_header.setMinimumSize(QSize(0, 60))
+        self.analyse_header.setMaximumSize(QSize(16777215, 60))
+        self.analyse_header.setStyleSheet(u"QPushButton{	\n"
+"	color: rgb(180,0,63);\n"
+"	font-family:Impact;\n"
+"	font-size:22px;\n"
+"	background-color: rgb(25, 25, 25);\n"
+"}\n"
+"QPushButton:checked{\n"
+"	background-color: rgb(55, 55, 55);\n"
+"}")
+        self.analyse_header.setFrameShape(QFrame.StyledPanel)
+        self.analyse_header.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_7 = QHBoxLayout(self.analyse_header)
+        self.horizontalLayout_7.setSpacing(1)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.analyse_resale_button = QPushButton(self.analyse_header)
+        self.analyse_resale_button.setObjectName(u"analyse_resale_button")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.analyse_resale_button.sizePolicy().hasHeightForWidth())
+        self.analyse_resale_button.setSizePolicy(sizePolicy)
+        self.analyse_resale_button.setStyleSheet(u"border-left: 1px solid rgb(180,0,63);")
+        self.analyse_resale_button.setIcon(icon2)
+        self.analyse_resale_button.setIconSize(QSize(40, 40))
+        self.analyse_resale_button.setCheckable(True)
+        self.analyse_resale_button.setAutoExclusive(True)
+
+        self.horizontalLayout_7.addWidget(self.analyse_resale_button)
+
+        self.analyse_cars_button = QPushButton(self.analyse_header)
+        self.analyse_cars_button.setObjectName(u"analyse_cars_button")
+        sizePolicy.setHeightForWidth(self.analyse_cars_button.sizePolicy().hasHeightForWidth())
+        self.analyse_cars_button.setSizePolicy(sizePolicy)
+        self.analyse_cars_button.setIcon(icon3)
+        self.analyse_cars_button.setIconSize(QSize(40, 40))
+        self.analyse_cars_button.setCheckable(True)
+        self.analyse_cars_button.setAutoExclusive(True)
+
+        self.horizontalLayout_7.addWidget(self.analyse_cars_button)
+
+
+        self.verticalLayout_8.addWidget(self.analyse_header)
+
+        self.frame_4 = QFrame(self.analyse_page)
+        self.frame_4.setObjectName(u"frame_4")
+        self.frame_4.setFrameShape(QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_8 = QHBoxLayout(self.frame_4)
+        self.horizontalLayout_8.setSpacing(0)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.stackedWidget_2 = QStackedWidget(self.frame_4)
+        self.stackedWidget_2.setObjectName(u"stackedWidget_2")
+        self.analyse_resale_page = QWidget()
+        self.analyse_resale_page.setObjectName(u"analyse_resale_page")
+        self.frame_6 = QFrame(self.analyse_resale_page)
+        self.frame_6.setObjectName(u"frame_6")
+        self.frame_6.setGeometry(QRect(50, 30, 931, 441))
+        self.frame_6.setStyleSheet(u"QLabel{\n"
+"	color: white;\n"
+"	font-family:Impact;\n"
+"	font-size:16px;\n"
+"	border: none;\n"
+"}\n"
+"QFrame{\n"
+"	border-radius: 5px;\n"
+"	border: 2px solid rgb(183, 0, 65);\n"
+"}")
+        self.frame_6.setFrameShape(QFrame.StyledPanel)
+        self.frame_6.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.frame_6)
+        self.horizontalLayout_10.setSpacing(30)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_9 = QHBoxLayout()
+        self.horizontalLayout_9.setSpacing(30)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.frame_7 = QFrame(self.frame_6)
+        self.frame_7.setObjectName(u"frame_7")
+        self.frame_7.setStyleSheet(u"QLabel{\n"
+"	border: none;\n"
+"}\n"
+"QFrame{\n"
+"	border-radius: 5px;\n"
+"	border: 2px solid rgb(183, 0, 65);\n"
+"}")
+        self.frame_7.setFrameShape(QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_11 = QVBoxLayout(self.frame_7)
+        self.verticalLayout_11.setSpacing(12)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
+        self.label_4 = QLabel(self.frame_7)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setStyleSheet(u"\n"
+"border:none;")
+
+        self.verticalLayout_11.addWidget(self.label_4)
+
+        self.analyse_resale_income_for_day = QLabel(self.frame_7)
+        self.analyse_resale_income_for_day.setObjectName(u"analyse_resale_income_for_day")
+        self.analyse_resale_income_for_day.setStyleSheet(u"font-size: 40px;\n"
+"border:none;")
+
+        self.verticalLayout_11.addWidget(self.analyse_resale_income_for_day)
+
+        self.line_4 = QFrame(self.frame_7)
+        self.line_4.setObjectName(u"line_4")
+        self.line_4.setFrameShape(QFrame.HLine)
+        self.line_4.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_11.addWidget(self.line_4)
+
+        self.analyse_resale_quantity_for_day = QLabel(self.frame_7)
+        self.analyse_resale_quantity_for_day.setObjectName(u"analyse_resale_quantity_for_day")
+        self.analyse_resale_quantity_for_day.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_11.addWidget(self.analyse_resale_quantity_for_day)
+
+        self.line_10 = QFrame(self.frame_7)
+        self.line_10.setObjectName(u"line_10")
+        self.line_10.setFrameShape(QFrame.HLine)
+        self.line_10.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_11.addWidget(self.line_10)
+
+        self.label_25 = QLabel(self.frame_7)
+        self.label_25.setObjectName(u"label_25")
+        self.label_25.setStyleSheet(u"border:none;")
+        self.label_25.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_11.addWidget(self.label_25)
+
+        self.analyse_resale_avgprice_for_day = QLabel(self.frame_7)
+        self.analyse_resale_avgprice_for_day.setObjectName(u"analyse_resale_avgprice_for_day")
+        self.analyse_resale_avgprice_for_day.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_11.addWidget(self.analyse_resale_avgprice_for_day)
+
+        self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_11.addItem(self.verticalSpacer_5)
+
+
+        self.horizontalLayout_9.addWidget(self.frame_7)
+
+        self.frame_8 = QFrame(self.frame_6)
+        self.frame_8.setObjectName(u"frame_8")
+        self.frame_8.setStyleSheet(u"QLabel{\n"
+"	border: none;\n"
+"}\n"
+"QFrame{\n"
+"	border-radius: 5px;\n"
+"	border: 2px solid rgb(183, 0, 65);\n"
+"}")
+        self.frame_8.setFrameShape(QFrame.StyledPanel)
+        self.frame_8.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_14 = QVBoxLayout(self.frame_8)
+        self.verticalLayout_14.setSpacing(12)
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.label_8 = QLabel(self.frame_8)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_14.addWidget(self.label_8)
+
+        self.analyse_resale_income_for_week = QLabel(self.frame_8)
+        self.analyse_resale_income_for_week.setObjectName(u"analyse_resale_income_for_week")
+        self.analyse_resale_income_for_week.setStyleSheet(u"font-size: 40px;\n"
+"border:none;")
+
+        self.verticalLayout_14.addWidget(self.analyse_resale_income_for_week)
+
+        self.line_5 = QFrame(self.frame_8)
+        self.line_5.setObjectName(u"line_5")
+        self.line_5.setFrameShape(QFrame.HLine)
+        self.line_5.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_14.addWidget(self.line_5)
+
+        self.analyse_resale_quantity_for_week = QLabel(self.frame_8)
+        self.analyse_resale_quantity_for_week.setObjectName(u"analyse_resale_quantity_for_week")
+        self.analyse_resale_quantity_for_week.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_14.addWidget(self.analyse_resale_quantity_for_week)
+
+        self.line_11 = QFrame(self.frame_8)
+        self.line_11.setObjectName(u"line_11")
+        self.line_11.setFrameShape(QFrame.HLine)
+        self.line_11.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_14.addWidget(self.line_11)
+
+        self.label_24 = QLabel(self.frame_8)
+        self.label_24.setObjectName(u"label_24")
+        self.label_24.setStyleSheet(u"border:none;")
+        self.label_24.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_14.addWidget(self.label_24)
+
+        self.analyse_resale_avgprice_for_week = QLabel(self.frame_8)
+        self.analyse_resale_avgprice_for_week.setObjectName(u"analyse_resale_avgprice_for_week")
+        self.analyse_resale_avgprice_for_week.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_14.addWidget(self.analyse_resale_avgprice_for_week)
+
+        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_14.addItem(self.verticalSpacer_6)
+
+
+        self.horizontalLayout_9.addWidget(self.frame_8)
+
+        self.frame_9 = QFrame(self.frame_6)
+        self.frame_9.setObjectName(u"frame_9")
+        self.frame_9.setStyleSheet(u"QLabel{\n"
+"	border: none;\n"
+"}\n"
+"QFrame{\n"
+"	border-radius: 5px;\n"
+"	border: 2px solid rgb(183, 0, 65);\n"
+"}")
+        self.frame_9.setFrameShape(QFrame.StyledPanel)
+        self.frame_9.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_13 = QVBoxLayout(self.frame_9)
+        self.verticalLayout_13.setSpacing(12)
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.label_10 = QLabel(self.frame_9)
+        self.label_10.setObjectName(u"label_10")
+        self.label_10.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_13.addWidget(self.label_10)
+
+        self.analyse_resale_income_for_month = QLabel(self.frame_9)
+        self.analyse_resale_income_for_month.setObjectName(u"analyse_resale_income_for_month")
+        self.analyse_resale_income_for_month.setStyleSheet(u"font-size: 40px;\n"
+"border:none;")
+
+        self.verticalLayout_13.addWidget(self.analyse_resale_income_for_month)
+
+        self.line_6 = QFrame(self.frame_9)
+        self.line_6.setObjectName(u"line_6")
+        self.line_6.setFrameShape(QFrame.HLine)
+        self.line_6.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_13.addWidget(self.line_6)
+
+        self.analyse_resale_quantity_for_month = QLabel(self.frame_9)
+        self.analyse_resale_quantity_for_month.setObjectName(u"analyse_resale_quantity_for_month")
+        self.analyse_resale_quantity_for_month.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_13.addWidget(self.analyse_resale_quantity_for_month)
+
+        self.line_12 = QFrame(self.frame_9)
+        self.line_12.setObjectName(u"line_12")
+        self.line_12.setFrameShape(QFrame.HLine)
+        self.line_12.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_13.addWidget(self.line_12)
+
+        self.label_23 = QLabel(self.frame_9)
+        self.label_23.setObjectName(u"label_23")
+        self.label_23.setStyleSheet(u"border:none;")
+        self.label_23.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_13.addWidget(self.label_23)
+
+        self.analyse_resale_avgprice_for_month = QLabel(self.frame_9)
+        self.analyse_resale_avgprice_for_month.setObjectName(u"analyse_resale_avgprice_for_month")
+        self.analyse_resale_avgprice_for_month.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_13.addWidget(self.analyse_resale_avgprice_for_month)
+
+        self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_13.addItem(self.verticalSpacer_7)
+
+
+        self.horizontalLayout_9.addWidget(self.frame_9)
+
+
+        self.horizontalLayout_10.addLayout(self.horizontalLayout_9)
+
+        self.stackedWidget_2.addWidget(self.analyse_resale_page)
+        self.analyse_cars_page = QWidget()
+        self.analyse_cars_page.setObjectName(u"analyse_cars_page")
+        self.horizontalLayout_11 = QHBoxLayout(self.analyse_cars_page)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.frame_10 = QFrame(self.analyse_cars_page)
+        self.frame_10.setObjectName(u"frame_10")
+        self.frame_10.setFrameShape(QFrame.StyledPanel)
+        self.frame_10.setFrameShadow(QFrame.Raised)
+        self.analyse_car_combobox_ = QComboBox(self.frame_10)
+        self.analyse_car_combobox_.setObjectName(u"analyse_car_combobox_")
+        self.analyse_car_combobox_.setGeometry(QRect(90, 10, 851, 61))
+        self.analyse_car_combobox_.setStyleSheet(u"QComboBox{\n"
+"	font-size: 32px; \n"
+"	font-family: Impact;\n"
+"	height: 35px;\n"
+"	border-radius: 15px;\n"
+"	background-color: rgb(85, 85, 85);\n"
+"	color: white;	\n"
+"}\n"
+"QComboBox QAbstractItemView{\n"
+"	color: white;\n"
+"    selection-background-color: rgb(100,100,100);\n"
+"}\n"
+"QComboBox QAbstractItemView::item:hover{\n"
+"	border: 1px solid white;\n"
+"}\n"
+"QComboBox::down-arrow {\n"
+"	border:none;\n"
+"	background-color:none;\n"
+"    }\n"
+"QComboBox::drop-down {\n"
+"    border: none;\n"
+"	image: url(:/icon-color/icons/menu.svg);\n"
+"	padding-top:12px;\n"
+"	padding-right:16px;\n"
+"	height: 35px;\n"
+"	width: 35px;\n"
+"}")
+        self.analyse_cars_statsframe = QFrame(self.frame_10)
+        self.analyse_cars_statsframe.setObjectName(u"analyse_cars_statsframe")
+        self.analyse_cars_statsframe.setGeometry(QRect(50, 100, 931, 371))
+        self.analyse_cars_statsframe.setStyleSheet(u"QLabel{\n"
+"	color: white;\n"
+"	font-family:Impact;\n"
+"	font-size:16px;\n"
+"	border: none;\n"
+"}\n"
+"QFrame{\n"
+"	border-radius: 5px;\n"
+"	border: 2px solid rgb(183, 0, 65);\n"
+"}")
+        self.analyse_cars_statsframe.setFrameShape(QFrame.StyledPanel)
+        self.analyse_cars_statsframe.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_12 = QHBoxLayout(self.analyse_cars_statsframe)
+        self.horizontalLayout_12.setSpacing(30)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.horizontalLayout_13 = QHBoxLayout()
+        self.horizontalLayout_13.setSpacing(30)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.frame_12 = QFrame(self.analyse_cars_statsframe)
+        self.frame_12.setObjectName(u"frame_12")
+        self.frame_12.setStyleSheet(u"QLabel{\n"
+"	border: none;\n"
+"}\n"
+"QFrame{\n"
+"	border-radius: 5px;\n"
+"	border: 2px solid rgb(183, 0, 65);\n"
+"}")
+        self.frame_12.setFrameShape(QFrame.StyledPanel)
+        self.frame_12.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_15 = QVBoxLayout(self.frame_12)
+        self.verticalLayout_15.setSpacing(12)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.label_15 = QLabel(self.frame_12)
+        self.label_15.setObjectName(u"label_15")
+        self.label_15.setStyleSheet(u"font-size:22px;\n"
+"border:none;")
+
+        self.verticalLayout_15.addWidget(self.label_15)
+
+        self.analyse_cars_income_for_week = QLabel(self.frame_12)
+        self.analyse_cars_income_for_week.setObjectName(u"analyse_cars_income_for_week")
+        self.analyse_cars_income_for_week.setStyleSheet(u"font-size: 40px;\n"
+"border:none;")
+
+        self.verticalLayout_15.addWidget(self.analyse_cars_income_for_week)
+
+        self.line = QFrame(self.frame_12)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.HLine)
+        self.line.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_15.addWidget(self.line)
+
+        self.analyse_car_quantity_for_week = QLabel(self.frame_12)
+        self.analyse_car_quantity_for_week.setObjectName(u"analyse_car_quantity_for_week")
+        self.analyse_car_quantity_for_week.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_15.addWidget(self.analyse_car_quantity_for_week)
+
+        self.line_7 = QFrame(self.frame_12)
+        self.line_7.setObjectName(u"line_7")
+        self.line_7.setFrameShape(QFrame.HLine)
+        self.line_7.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_15.addWidget(self.line_7)
+
+        self.label_17 = QLabel(self.frame_12)
+        self.label_17.setObjectName(u"label_17")
+        self.label_17.setStyleSheet(u"border:none;")
+        self.label_17.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_15.addWidget(self.label_17)
+
+        self.analyse_cars_avgprice_for_week = QLabel(self.frame_12)
+        self.analyse_cars_avgprice_for_week.setObjectName(u"analyse_cars_avgprice_for_week")
+        self.analyse_cars_avgprice_for_week.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_15.addWidget(self.analyse_cars_avgprice_for_week)
+
+        self.analyse_cars_avghours_for_week = QLabel(self.frame_12)
+        self.analyse_cars_avghours_for_week.setObjectName(u"analyse_cars_avghours_for_week")
+        self.analyse_cars_avghours_for_week.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_15.addWidget(self.analyse_cars_avghours_for_week)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_15.addItem(self.verticalSpacer_2)
+
+
+        self.horizontalLayout_13.addWidget(self.frame_12)
+
+        self.frame_13 = QFrame(self.analyse_cars_statsframe)
+        self.frame_13.setObjectName(u"frame_13")
+        self.frame_13.setStyleSheet(u"QLabel{\n"
+"	border: none;\n"
+"}\n"
+"QFrame{\n"
+"	border-radius: 5px;\n"
+"	border: 2px solid rgb(183, 0, 65);\n"
+"}")
+        self.frame_13.setFrameShape(QFrame.StyledPanel)
+        self.frame_13.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_16 = QVBoxLayout(self.frame_13)
+        self.verticalLayout_16.setSpacing(12)
+        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.label_18 = QLabel(self.frame_13)
+        self.label_18.setObjectName(u"label_18")
+        self.label_18.setStyleSheet(u"font-size:22px;\n"
+"border:none;")
+
+        self.verticalLayout_16.addWidget(self.label_18)
+
+        self.analyse_cars_income_for_month = QLabel(self.frame_13)
+        self.analyse_cars_income_for_month.setObjectName(u"analyse_cars_income_for_month")
+        self.analyse_cars_income_for_month.setStyleSheet(u"font-size: 40px;\n"
+"border:none;")
+
+        self.verticalLayout_16.addWidget(self.analyse_cars_income_for_month)
+
+        self.line_2 = QFrame(self.frame_13)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.HLine)
+        self.line_2.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_16.addWidget(self.line_2)
+
+        self.analyse_car_quantity_for_month = QLabel(self.frame_13)
+        self.analyse_car_quantity_for_month.setObjectName(u"analyse_car_quantity_for_month")
+        self.analyse_car_quantity_for_month.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_16.addWidget(self.analyse_car_quantity_for_month)
+
+        self.line_8 = QFrame(self.frame_13)
+        self.line_8.setObjectName(u"line_8")
+        self.line_8.setFrameShape(QFrame.HLine)
+        self.line_8.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_16.addWidget(self.line_8)
+
+        self.label_20 = QLabel(self.frame_13)
+        self.label_20.setObjectName(u"label_20")
+        self.label_20.setStyleSheet(u"border:none;")
+        self.label_20.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_16.addWidget(self.label_20)
+
+        self.analyse_cars_avgprice_for_month = QLabel(self.frame_13)
+        self.analyse_cars_avgprice_for_month.setObjectName(u"analyse_cars_avgprice_for_month")
+        self.analyse_cars_avgprice_for_month.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_16.addWidget(self.analyse_cars_avgprice_for_month)
+
+        self.analyse_cars_avghours_for_month = QLabel(self.frame_13)
+        self.analyse_cars_avghours_for_month.setObjectName(u"analyse_cars_avghours_for_month")
+        self.analyse_cars_avghours_for_month.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_16.addWidget(self.analyse_cars_avghours_for_month)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_16.addItem(self.verticalSpacer_3)
+
+
+        self.horizontalLayout_13.addWidget(self.frame_13)
+
+        self.frame_14 = QFrame(self.analyse_cars_statsframe)
+        self.frame_14.setObjectName(u"frame_14")
+        self.frame_14.setStyleSheet(u"QLabel{\n"
+"	border: none;\n"
+"}\n"
+"QFrame{\n"
+"	border-radius: 5px;\n"
+"	border: 2px solid rgb(183, 0, 65);\n"
+"}")
+        self.frame_14.setFrameShape(QFrame.StyledPanel)
+        self.frame_14.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_17 = QVBoxLayout(self.frame_14)
+        self.verticalLayout_17.setSpacing(12)
+        self.verticalLayout_17.setObjectName(u"verticalLayout_17")
+        self.label_21 = QLabel(self.frame_14)
+        self.label_21.setObjectName(u"label_21")
+        self.label_21.setStyleSheet(u"font-size:22px;\n"
+"border:none;")
+
+        self.verticalLayout_17.addWidget(self.label_21)
+
+        self.analyse_cars_income_for_alltime = QLabel(self.frame_14)
+        self.analyse_cars_income_for_alltime.setObjectName(u"analyse_cars_income_for_alltime")
+        self.analyse_cars_income_for_alltime.setStyleSheet(u"font-size: 40px;\n"
+"border:none;")
+
+        self.verticalLayout_17.addWidget(self.analyse_cars_income_for_alltime)
+
+        self.line_3 = QFrame(self.frame_14)
+        self.line_3.setObjectName(u"line_3")
+        self.line_3.setFrameShape(QFrame.HLine)
+        self.line_3.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_17.addWidget(self.line_3)
+
+        self.analyse_car_quantity_for_alltime = QLabel(self.frame_14)
+        self.analyse_car_quantity_for_alltime.setObjectName(u"analyse_car_quantity_for_alltime")
+        self.analyse_car_quantity_for_alltime.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_17.addWidget(self.analyse_car_quantity_for_alltime)
+
+        self.line_9 = QFrame(self.frame_14)
+        self.line_9.setObjectName(u"line_9")
+        self.line_9.setFrameShape(QFrame.HLine)
+        self.line_9.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_17.addWidget(self.line_9)
+
+        self.label_22 = QLabel(self.frame_14)
+        self.label_22.setObjectName(u"label_22")
+        self.label_22.setStyleSheet(u"border:none;")
+        self.label_22.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_17.addWidget(self.label_22)
+
+        self.analyse_cars_avgprice_for_alltime = QLabel(self.frame_14)
+        self.analyse_cars_avgprice_for_alltime.setObjectName(u"analyse_cars_avgprice_for_alltime")
+        self.analyse_cars_avgprice_for_alltime.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_17.addWidget(self.analyse_cars_avgprice_for_alltime)
+
+        self.analyse_cars_avghours_for_alltime = QLabel(self.frame_14)
+        self.analyse_cars_avghours_for_alltime.setObjectName(u"analyse_cars_avghours_for_alltime")
+        self.analyse_cars_avghours_for_alltime.setStyleSheet(u"border:none;")
+
+        self.verticalLayout_17.addWidget(self.analyse_cars_avghours_for_alltime)
+
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_17.addItem(self.verticalSpacer_4)
+
+
+        self.horizontalLayout_13.addWidget(self.frame_14)
+
+
+        self.horizontalLayout_12.addLayout(self.horizontalLayout_13)
+
+
+        self.horizontalLayout_11.addWidget(self.frame_10)
+
+        self.stackedWidget_2.addWidget(self.analyse_cars_page)
+
+        self.horizontalLayout_8.addWidget(self.stackedWidget_2)
+
+
+        self.verticalLayout_8.addWidget(self.frame_4)
+
+        self.stackedWidget.addWidget(self.analyse_page)
 
         self.horizontalLayout_3.addWidget(self.stackedWidget)
 
@@ -562,7 +1150,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.close_button.clicked.connect(MainWindow.close)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget_2.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -591,6 +1180,41 @@ class Ui_MainWindow(object):
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0440\u0435\u043c\u044f:", None))
         self.cars_addincome_button.setText(QCoreApplication.translate("MainWindow", u"\u0421\u041e\u0425\u0420\u0410\u041d\u0418\u0422\u042c", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043c\u0430\u0448\u0438\u043d\u044b:", None))
-        self.cars_addcar_button.setText(QCoreApplication.translate("MainWindow", u"\u0421\u041e\u0425\u0420\u0410\u041d\u0418\u0422\u042c", None))
+        self.cars_addcar_button.setText(QCoreApplication.translate("MainWindow", u"\u0414\u041e\u0411\u0410\u0412\u0418\u0422\u042c", None))
+        self.analyse_resale_button.setText(QCoreApplication.translate("MainWindow", u"\u0420\u0435\u0441\u0435\u0439\u043b", None))
+        self.analyse_cars_button.setText(QCoreApplication.translate("MainWindow", u"\u0410\u0440\u0435\u043d\u0434\u0430", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0431\u044b\u043b\u044c \u0441\u0435\u0433\u043e\u0434\u043d\u044f:", None))
+        self.analyse_resale_income_for_day.setText(QCoreApplication.translate("MainWindow", u"123123$", None))
+        self.analyse_resale_quantity_for_day.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
+        self.label_25.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u0438\u0435 \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438:", None))
+        self.analyse_resale_avgprice_for_day.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u044f\u044f \u0446\u0435\u043d\u0430:", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0431\u044b\u043b\u044c \u0437\u0430 \u043d\u0435\u0434\u0435\u043b\u044e:", None))
+        self.analyse_resale_income_for_week.setText(QCoreApplication.translate("MainWindow", u"123123$", None))
+        self.analyse_resale_quantity_for_week.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
+        self.label_24.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u0438\u0435 \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438:", None))
+        self.analyse_resale_avgprice_for_week.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u044f\u044f \u0446\u0435\u043d\u0430:", None))
+        self.label_10.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0431\u044b\u043b\u044c \u0437\u0430 \u043c\u0435\u0441\u044f\u0446:", None))
+        self.analyse_resale_income_for_month.setText(QCoreApplication.translate("MainWindow", u"123123$", None))
+        self.analyse_resale_quantity_for_month.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
+        self.label_23.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u0438\u0435 \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438:", None))
+        self.analyse_resale_avgprice_for_month.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u044f\u044f \u0446\u0435\u043d\u0430:", None))
+        self.label_15.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0431\u044b\u043b\u044c \u0437\u0430 \u043d\u0435\u0434\u0435\u043b\u044e:", None))
+        self.analyse_cars_income_for_week.setText(QCoreApplication.translate("MainWindow", u"123123$", None))
+        self.analyse_car_quantity_for_week.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
+        self.label_17.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u0438\u0435 \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438:", None))
+        self.analyse_cars_avgprice_for_week.setText(QCoreApplication.translate("MainWindow", u"\u0426\u0435\u043d\u0430:", None))
+        self.analyse_cars_avghours_for_week.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0440\u0435\u043c\u044f:", None))
+        self.label_18.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0431\u044b\u043b\u044c \u0437\u0430 \u043c\u0435\u0441\u044f\u0446:", None))
+        self.analyse_cars_income_for_month.setText(QCoreApplication.translate("MainWindow", u"123123$", None))
+        self.analyse_car_quantity_for_month.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
+        self.label_20.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u0438\u0435 \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438:", None))
+        self.analyse_cars_avgprice_for_month.setText(QCoreApplication.translate("MainWindow", u"\u0426\u0435\u043d\u0430:", None))
+        self.analyse_cars_avghours_for_month.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0440\u0435\u043c\u044f:", None))
+        self.label_21.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0431\u044b\u043b\u044c \u0437\u0430 \u0432\u0441\u0451 \u0432\u0440\u0435\u043c\u044f:", None))
+        self.analyse_cars_income_for_alltime.setText(QCoreApplication.translate("MainWindow", u"123123$", None))
+        self.analyse_car_quantity_for_alltime.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
+        self.label_22.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u0438\u0435 \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438:", None))
+        self.analyse_cars_avgprice_for_alltime.setText(QCoreApplication.translate("MainWindow", u"\u0426\u0435\u043d\u0430:", None))
+        self.analyse_cars_avghours_for_alltime.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0440\u0435\u043c\u044f:", None))
     # retranslateUi
 

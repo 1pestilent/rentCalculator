@@ -188,3 +188,56 @@ class ConnectToDB:
             print("Getting last profit from cars - error: ", query.lastError().text())
         query.finish()
         return last_car_profit
+    
+    def get_resale_stats_for_day(self):
+        resale_stats_for_day = []
+        query = QSqlQuery()
+        query.prepare('SELECT SUM(profit),AVG(profit),COUNT(*) FROM resale WHERE DATE(timedate) = CURRENT_DATE')
+        if query.exec():
+            while query.next():
+                profit = query.value(0)
+                avg_profit = round(query.value(1))
+                quantity = query.value(2)
+                resale_stats_for_day.append(profit)
+                resale_stats_for_day.append(avg_profit)
+                resale_stats_for_day.append(quantity)
+            return resale_stats_for_day
+        else:
+            print("Getting resales profit for this day - error: ", query.lastError().text())
+            return False
+        
+    def get_resale_stats_for_week(self):
+        resale_stats_for_week = []
+        query = QSqlQuery()
+        query.prepare("""SELECT SUM(profit),AVG(profit),COUNT(*) FROM resale WHERE DATE(timedate) BETWEEN DATE(CURRENT_DATE, '-7 days') AND CURRENT_DATE;""")
+        if query.exec():
+            while query.next():
+                profit = query.value(0)
+                avg_profit = round(query.value(1))
+                quantity = query.value(2)
+                resale_stats_for_week.append(profit)
+                resale_stats_for_week.append(avg_profit)
+                resale_stats_for_week.append(quantity)
+            query.finish()
+            return resale_stats_for_week
+        else:
+            print("Getting resales profit for this day - error: ", query.lastError().text())
+            return False
+    
+    def get_resale_stats_for_month(self):
+        resale_stats_for_month = []
+        query = QSqlQuery()
+        query.prepare("""SELECT SUM(profit),AVG(profit),COUNT(*) FROM resale WHERE DATE(timedate) BETWEEN DATE(CURRENT_DATE, '-30 days') AND CURRENT_DATE;""")
+        if query.exec():
+            while query.next():
+                profit = query.value(0)
+                avg_profit = round(query.value(1))
+                quantity = query.value(2)
+                resale_stats_for_month.append(profit)
+                resale_stats_for_month.append(avg_profit)
+                resale_stats_for_month.append(quantity)
+            query.finish()
+            return resale_stats_for_month
+        else:
+            print("Getting resales profit for this day - error: ", query.lastError().text())
+            return False

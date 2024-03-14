@@ -21,9 +21,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.cars_hours_edit.setMaxLength(2)
 
         self.setWindowFlag(Qt.FramelessWindowHint)
+        self.minimize_button.clicked.connect(self.showMinimized)
 
         self.resale_button.clicked.connect(self.open_resale_page)
         self.cars_button.clicked.connect(self.open_cars_page)
+        self.analyse_button.clicked.connect(self.open_analyse_page)
+        self.analyse_cars_button.clicked.connect(self.open_analyse_cars_page)
+        self.analyse_resale_button.clicked.connect(self.open_analyse_resale_page)
 
         self.header.mouseMoveEvent = self.moveWindow
 
@@ -38,12 +42,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.refresh_carcombo()
         self.add_notes()
         self.resale_button.click()
+        self.analyse_resale_button.click()
 
     def open_resale_page(self):
         self.stackedWidget.setCurrentWidget(self.resale_page)
 
     def open_cars_page(self):
-        self.stackedWidget.setCurrentWidget(self.cars_page)    
+        self.stackedWidget.setCurrentWidget(self.cars_page)
+
+    def open_analyse_page(self):
+        self.stackedWidget.setCurrentWidget(self.analyse_page)
+        self.refresh_analyse_resale_page()
+
+    def open_analyse_cars_page(self):
+        self.stackedWidget_2.setCurrentWidget(self.analyse_cars_page)
+        self.analyse_car_combobox_.clear()
+        if self.connect.get_car_list():
+            car_list = self.connect.get_car_list()
+            for car in car_list:
+                self.analyse_car_combobox_.addItem(f'[ID{car[0]}] {car[1]}')
+
+    def open_analyse_resale_page(self):
+        self.stackedWidget_2.setCurrentWidget(self.analyse_resale_page)
 
     def moveWindow(self, event):
         self.move(self.pos() + event.globalPos() - self.clickPosition)
@@ -164,4 +184,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.cars_story_layout.addWidget(note)
             self.cars_profit_edit.clear()
             self.cars_hours_edit.clear()
+
+    def refresh_analyse_resale_page(self):
+        if self.connect.get_resale_stats_for_day():
+            stats_for_day = self.connect.get_resale_stats_for_day()
+            profit = '{:,.0f}'.format(stats_for_day[0]).replace(',', '.')
+            avg_profit = '{:,.0f}'.format(stats_for_day[1]).replace(',', '.')
+            self.analyse_resale_income_for_day.setText(f'{profit}$')
+            self.analyse_resale_avgprice_for_day.setText(f'Прибыль: {avg_profit}$')
+            self.analyse_resale_quantity_for_day.setText(f'Количество сделок: {stats_for_day[2]}')
+        if self.connect.get_resale_stats_for_week():
+            stats_for_day = self.connect.get_resale_stats_for_week()
+            profit = '{:,.0f}'.format(stats_for_day[0]).replace(',', '.')
+            avg_profit = '{:,.0f}'.format(stats_for_day[1]).replace(',', '.')
+            self.analyse_resale_income_for_week.setText(f'{profit}$')
+            self.analyse_resale_avgprice_for_week.setText(f'Прибыль: {avg_profit}$')
+            self.analyse_resale_quantity_for_week.setText(f'Количество сделок: {stats_for_day[2]}')
+        if self.connect.get_resale_stats_for_month():
+            stats_for_day = self.connect.get_resale_stats_for_month()
+            profit = '{:,.0f}'.format(stats_for_day[0]).replace(',', '.')
+            avg_profit = '{:,.0f}'.format(stats_for_day[1]).replace(',', '.')
+            self.analyse_resale_income_for_month.setText(f'{profit}$')
+            self.analyse_resale_avgprice_for_month.setText(f'Прибыль: {avg_profit}$')
+            self.analyse_resale_quantity_for_month.setText(f'Количество сделок: {stats_for_day[2]}')
+
 
