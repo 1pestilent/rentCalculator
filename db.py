@@ -192,7 +192,7 @@ class ConnectToDB:
     def get_resale_stats_for_day(self):
         resale_stats_for_day = []
         query = QSqlQuery()
-        query.prepare('SELECT SUM(profit),AVG(profit),COUNT(*) FROM resale WHERE DATE(timedate) = CURRENT_DATE')
+        query.prepare("""SELECT SUM(profit),AVG(profit),COUNT(*) FROM resale WHERE DATE(timedate) = CURRENT_DATE AND info != 'НОВАЯ СЕРИЯ'""")
         if query.exec():
             while query.next():
                 profit = query.value(0)
@@ -209,7 +209,7 @@ class ConnectToDB:
     def get_resale_stats_for_week(self):
         resale_stats_for_week = []
         query = QSqlQuery()
-        query.prepare("""SELECT SUM(profit),AVG(profit),COUNT(*) FROM resale WHERE DATE(timedate) BETWEEN DATE(CURRENT_DATE, '-7 days') AND CURRENT_DATE;""")
+        query.prepare("""SELECT SUM(profit),AVG(profit),COUNT(*) FROM resale WHERE info != 'НОВАЯ СЕРИЯ' AND DATE(timedate) BETWEEN DATE(CURRENT_DATE, '-7 days') AND CURRENT_DATE;""")
         if query.exec():
             while query.next():
                 profit = query.value(0)
@@ -227,17 +227,68 @@ class ConnectToDB:
     def get_resale_stats_for_month(self):
         resale_stats_for_month = []
         query = QSqlQuery()
-        query.prepare("""SELECT SUM(profit),AVG(profit),COUNT(*) FROM resale WHERE DATE(timedate) BETWEEN DATE(CURRENT_DATE, '-30 days') AND CURRENT_DATE;""")
+        query.prepare("""SELECT SUM(profit),AVG(profit),COUNT(*) FROM resale WHERE info != 'НОВАЯ СЕРИЯ' AND DATE(timedate) BETWEEN DATE(CURRENT_DATE, '-30 days') AND CURRENT_DATE;""")
         if query.exec():
             while query.next():
-                profit = query.value(0)
-                avg_profit = round(query.value(1))
-                quantity = query.value(2)
-                resale_stats_for_month.append(profit)
-                resale_stats_for_month.append(avg_profit)
-                resale_stats_for_month.append(quantity)
+                resale_stats_for_month.append(query.value(0))
+                resale_stats_for_month.append(round(query.value(1)))
+                resale_stats_for_month.append(query.value(2))
             query.finish()
             return resale_stats_for_month
+        else:
+            print("Getting resales profit for this day - error: ", query.lastError().text())
+            return False
+        
+    def get_car_stats_for_week(self, id):
+        car_stats = []
+        query = QSqlQuery()
+        query.prepare("""SELECT SUM(amount_profit), AVG(amount_profit), AVG(hours_quantity),AVG(amount_profit / hours_quantity) ,COUNT(*) FROM income WHERE car_id = ? AND DATE(rent_day) BETWEEN DATE(CURRENT_DATE, '-7 days') AND CURRENT_DATE;""")
+        query.bindValue(0, id)
+        if query.exec():
+            while query.next():
+                car_stats.append(query.value(0))
+                car_stats.append(round(query.value(1)))
+                car_stats.append(round(query.value(2)))
+                car_stats.append(round(query.value(3)))
+                car_stats.append(query.value(4))
+            query.finish()
+            return car_stats
+        else:
+            print("Getting resales profit for this day - error: ", query.lastError().text())
+            return False
+
+    def get_car_stats_for_month(self, id):
+        car_stats = []
+        query = QSqlQuery()
+        query.prepare("""SELECT SUM(amount_profit), AVG(amount_profit), AVG(hours_quantity),AVG(amount_profit / hours_quantity) ,COUNT(*) FROM income WHERE car_id = ? AND DATE(rent_day) BETWEEN DATE(CURRENT_DATE, '-30 days') AND CURRENT_DATE;""")
+        query.bindValue(0, id)
+        if query.exec():
+            while query.next():
+                car_stats.append(query.value(0))
+                car_stats.append(round(query.value(1)))
+                car_stats.append(round(query.value(2)))
+                car_stats.append(round(query.value(3)))
+                car_stats.append(query.value(4))
+            query.finish()
+            return car_stats
+        else:
+            print("Getting resales profit for this day - error: ", query.lastError().text())
+            return False
+        
+    def get_car_stats_for_alltime(self, id):
+        car_stats = []
+        query = QSqlQuery()
+        query.prepare("""SELECT SUM(amount_profit), AVG(amount_profit), AVG(hours_quantity),AVG(amount_profit / hours_quantity) ,COUNT(*) FROM income WHERE car_id = ?;""")
+        query.bindValue(0, id)
+        if query.exec():
+            while query.next():
+                car_stats.append(query.value(0))
+                car_stats.append(round(query.value(1)))
+                car_stats.append(round(query.value(2)))
+                car_stats.append(round(query.value(3)))
+                car_stats.append(query.value(4))
+            query.finish()
+            return car_stats
         else:
             print("Getting resales profit for this day - error: ", query.lastError().text())
             return False

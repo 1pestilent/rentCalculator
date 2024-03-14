@@ -849,10 +849,10 @@ class Ui_MainWindow(object):
         self.frame_10.setObjectName(u"frame_10")
         self.frame_10.setFrameShape(QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QFrame.Raised)
-        self.analyse_car_combobox_ = QComboBox(self.frame_10)
-        self.analyse_car_combobox_.setObjectName(u"analyse_car_combobox_")
-        self.analyse_car_combobox_.setGeometry(QRect(90, 10, 851, 61))
-        self.analyse_car_combobox_.setStyleSheet(u"QComboBox{\n"
+        self.analyse_car_combobox = QComboBox(self.frame_10)
+        self.analyse_car_combobox.setObjectName(u"analyse_car_combobox")
+        self.analyse_car_combobox.setGeometry(QRect(90, 10, 851, 61))
+        self.analyse_car_combobox.setStyleSheet(u"QComboBox{\n"
 "	font-size: 32px; \n"
 "	font-family: Impact;\n"
 "	height: 35px;\n"
@@ -935,11 +935,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_15.addWidget(self.line)
 
-        self.analyse_car_quantity_for_week = QLabel(self.frame_12)
-        self.analyse_car_quantity_for_week.setObjectName(u"analyse_car_quantity_for_week")
-        self.analyse_car_quantity_for_week.setStyleSheet(u"border:none;")
+        self.analyse_cars_quantity_for_week = QLabel(self.frame_12)
+        self.analyse_cars_quantity_for_week.setObjectName(u"analyse_cars_quantity_for_week")
+        self.analyse_cars_quantity_for_week.setStyleSheet(u"border:none;")
 
-        self.verticalLayout_15.addWidget(self.analyse_car_quantity_for_week)
+        self.verticalLayout_15.addWidget(self.analyse_cars_quantity_for_week)
 
         self.line_7 = QFrame(self.frame_12)
         self.line_7.setObjectName(u"line_7")
@@ -966,6 +966,13 @@ class Ui_MainWindow(object):
         self.analyse_cars_avghours_for_week.setStyleSheet(u"border:none;")
 
         self.verticalLayout_15.addWidget(self.analyse_cars_avghours_for_week)
+
+        self.analyse_cars_price_per_hours_for_week = QLabel(self.frame_12)
+        self.analyse_cars_price_per_hours_for_week.setObjectName(u"analyse_cars_price_per_hours_for_week")
+        self.analyse_cars_price_per_hours_for_week.setStyleSheet(u"border:none;")
+        self.analyse_cars_price_per_hours_for_week.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.verticalLayout_15.addWidget(self.analyse_cars_price_per_hours_for_week)
 
         self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -1009,11 +1016,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_16.addWidget(self.line_2)
 
-        self.analyse_car_quantity_for_month = QLabel(self.frame_13)
-        self.analyse_car_quantity_for_month.setObjectName(u"analyse_car_quantity_for_month")
-        self.analyse_car_quantity_for_month.setStyleSheet(u"border:none;")
+        self.analyse_cars_quantity_for_month = QLabel(self.frame_13)
+        self.analyse_cars_quantity_for_month.setObjectName(u"analyse_cars_quantity_for_month")
+        self.analyse_cars_quantity_for_month.setStyleSheet(u"border:none;")
 
-        self.verticalLayout_16.addWidget(self.analyse_car_quantity_for_month)
+        self.verticalLayout_16.addWidget(self.analyse_cars_quantity_for_month)
 
         self.line_8 = QFrame(self.frame_13)
         self.line_8.setObjectName(u"line_8")
@@ -1040,6 +1047,13 @@ class Ui_MainWindow(object):
         self.analyse_cars_avghours_for_month.setStyleSheet(u"border:none;")
 
         self.verticalLayout_16.addWidget(self.analyse_cars_avghours_for_month)
+
+        self.analyse_cars_price_per_hours_for_month = QLabel(self.frame_13)
+        self.analyse_cars_price_per_hours_for_month.setObjectName(u"analyse_cars_price_per_hours_for_month")
+        self.analyse_cars_price_per_hours_for_month.setStyleSheet(u"border:none;")
+        self.analyse_cars_price_per_hours_for_month.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.verticalLayout_16.addWidget(self.analyse_cars_price_per_hours_for_month)
 
         self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -1083,11 +1097,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_17.addWidget(self.line_3)
 
-        self.analyse_car_quantity_for_alltime = QLabel(self.frame_14)
-        self.analyse_car_quantity_for_alltime.setObjectName(u"analyse_car_quantity_for_alltime")
-        self.analyse_car_quantity_for_alltime.setStyleSheet(u"border:none;")
+        self.analyse_cars_quantity_for_alltime = QLabel(self.frame_14)
+        self.analyse_cars_quantity_for_alltime.setObjectName(u"analyse_cars_quantity_for_alltime")
+        self.analyse_cars_quantity_for_alltime.setStyleSheet(u"border:none;")
 
-        self.verticalLayout_17.addWidget(self.analyse_car_quantity_for_alltime)
+        self.verticalLayout_17.addWidget(self.analyse_cars_quantity_for_alltime)
 
         self.line_9 = QFrame(self.frame_14)
         self.line_9.setObjectName(u"line_9")
@@ -1114,6 +1128,13 @@ class Ui_MainWindow(object):
         self.analyse_cars_avghours_for_alltime.setStyleSheet(u"border:none;")
 
         self.verticalLayout_17.addWidget(self.analyse_cars_avghours_for_alltime)
+
+        self.analyse_cars_price_per_hours_for_alltime = QLabel(self.frame_14)
+        self.analyse_cars_price_per_hours_for_alltime.setObjectName(u"analyse_cars_price_per_hours_for_alltime")
+        self.analyse_cars_price_per_hours_for_alltime.setStyleSheet(u"border:none;")
+        self.analyse_cars_price_per_hours_for_alltime.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.verticalLayout_17.addWidget(self.analyse_cars_price_per_hours_for_alltime)
 
         self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -1151,7 +1172,7 @@ class Ui_MainWindow(object):
         self.close_button.clicked.connect(MainWindow.close)
 
         self.stackedWidget.setCurrentIndex(2)
-        self.stackedWidget_2.setCurrentIndex(0)
+        self.stackedWidget_2.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1200,21 +1221,24 @@ class Ui_MainWindow(object):
         self.analyse_resale_avgprice_for_month.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u044f\u044f \u0446\u0435\u043d\u0430:", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0431\u044b\u043b\u044c \u0437\u0430 \u043d\u0435\u0434\u0435\u043b\u044e:", None))
         self.analyse_cars_income_for_week.setText(QCoreApplication.translate("MainWindow", u"123123$", None))
-        self.analyse_car_quantity_for_week.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
+        self.analyse_cars_quantity_for_week.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u0438\u0435 \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438:", None))
         self.analyse_cars_avgprice_for_week.setText(QCoreApplication.translate("MainWindow", u"\u0426\u0435\u043d\u0430:", None))
         self.analyse_cars_avghours_for_week.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0440\u0435\u043c\u044f:", None))
+        self.analyse_cars_price_per_hours_for_week.setText(QCoreApplication.translate("MainWindow", u"\u0426\u0435\u043d\u0430 \u0437\u0430 \u0447\u0430\u0441:", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0431\u044b\u043b\u044c \u0437\u0430 \u043c\u0435\u0441\u044f\u0446:", None))
         self.analyse_cars_income_for_month.setText(QCoreApplication.translate("MainWindow", u"123123$", None))
-        self.analyse_car_quantity_for_month.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
+        self.analyse_cars_quantity_for_month.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
         self.label_20.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u0438\u0435 \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438:", None))
         self.analyse_cars_avgprice_for_month.setText(QCoreApplication.translate("MainWindow", u"\u0426\u0435\u043d\u0430:", None))
         self.analyse_cars_avghours_for_month.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0440\u0435\u043c\u044f:", None))
+        self.analyse_cars_price_per_hours_for_month.setText(QCoreApplication.translate("MainWindow", u"\u0426\u0435\u043d\u0430 \u0437\u0430 \u0447\u0430\u0441:", None))
         self.label_21.setText(QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0438\u0431\u044b\u043b\u044c \u0437\u0430 \u0432\u0441\u0451 \u0432\u0440\u0435\u043c\u044f:", None))
         self.analyse_cars_income_for_alltime.setText(QCoreApplication.translate("MainWindow", u"123123$", None))
-        self.analyse_car_quantity_for_alltime.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
+        self.analyse_cars_quantity_for_alltime.setText(QCoreApplication.translate("MainWindow", u"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0441\u0434\u0435\u043b\u043e\u043a:", None))
         self.label_22.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0440\u0435\u0434\u043d\u0438\u0435 \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438:", None))
         self.analyse_cars_avgprice_for_alltime.setText(QCoreApplication.translate("MainWindow", u"\u0426\u0435\u043d\u0430:", None))
         self.analyse_cars_avghours_for_alltime.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0440\u0435\u043c\u044f:", None))
+        self.analyse_cars_price_per_hours_for_alltime.setText(QCoreApplication.translate("MainWindow", u"\u0426\u0435\u043d\u0430 \u0437\u0430 \u0447\u0430\u0441:", None))
     # retranslateUi
 

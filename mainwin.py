@@ -28,6 +28,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.analyse_button.clicked.connect(self.open_analyse_page)
         self.analyse_cars_button.clicked.connect(self.open_analyse_cars_page)
         self.analyse_resale_button.clicked.connect(self.open_analyse_resale_page)
+        self.analyse_cars_button.clicked.connect(self.refresh_analyse_car_page)
+        self.analyse_car_combobox.currentIndexChanged.connect(self.refresh_analyse_car_page)
 
         self.header.mouseMoveEvent = self.moveWindow
 
@@ -37,6 +39,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.cars_addcar_button.clicked.connect(self.add_car)
         self.cars_addincome_button.clicked.connect(self.add_rent_profit)
+
+        
         
         self.refresh_car_page()
         self.refresh_carcombo()
@@ -56,11 +60,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def open_analyse_cars_page(self):
         self.stackedWidget_2.setCurrentWidget(self.analyse_cars_page)
-        self.analyse_car_combobox_.clear()
-        if self.connect.get_car_list():
-            car_list = self.connect.get_car_list()
-            for car in car_list:
-                self.analyse_car_combobox_.addItem(f'[ID{car[0]}] {car[1]}')
 
     def open_analyse_resale_page(self):
         self.stackedWidget_2.setCurrentWidget(self.analyse_resale_page)
@@ -185,7 +184,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.cars_profit_edit.clear()
             self.cars_hours_edit.clear()
 
-    def refresh_analyse_resale_page(self):
+    def refresh_resale_stats_for_day(self):
         if self.connect.get_resale_stats_for_day():
             stats_for_day = self.connect.get_resale_stats_for_day()
             profit = '{:,.0f}'.format(stats_for_day[0]).replace(',', '.')
@@ -193,6 +192,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.analyse_resale_income_for_day.setText(f'{profit}$')
             self.analyse_resale_avgprice_for_day.setText(f'Прибыль: {avg_profit}$')
             self.analyse_resale_quantity_for_day.setText(f'Количество сделок: {stats_for_day[2]}')
+
+    def refresh_resale_stats_for_week(self):
         if self.connect.get_resale_stats_for_week():
             stats_for_day = self.connect.get_resale_stats_for_week()
             profit = '{:,.0f}'.format(stats_for_day[0]).replace(',', '.')
@@ -200,6 +201,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.analyse_resale_income_for_week.setText(f'{profit}$')
             self.analyse_resale_avgprice_for_week.setText(f'Прибыль: {avg_profit}$')
             self.analyse_resale_quantity_for_week.setText(f'Количество сделок: {stats_for_day[2]}')
+
+    def refresh_resale_stats_for_month(self):
         if self.connect.get_resale_stats_for_month():
             stats_for_day = self.connect.get_resale_stats_for_month()
             profit = '{:,.0f}'.format(stats_for_day[0]).replace(',', '.')
@@ -208,4 +211,59 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.analyse_resale_avgprice_for_month.setText(f'Прибыль: {avg_profit}$')
             self.analyse_resale_quantity_for_month.setText(f'Количество сделок: {stats_for_day[2]}')
 
+    def refresh_analyse_carcombo(self):
+        self.analyse_car_combobox.clear()
+        if self.connect.get_car_list():
+            car_list = self.connect.get_car_list()
+            for car in car_list:
+                self.analyse_car_combobox.addItem(f'[ID{car[0]}] {car[1]}')
 
+    def refresh_cars_stats_for_week(self):
+        id = self.analyse_car_combobox.currentText().split('[ID')[-1].split(']')[0]
+        if self.connect.get_car_stats_for_week(id):
+            stats = self.connect.get_car_stats_for_week(id)
+            income = '{:,.0f}'.format(stats[0]).replace(',', '.')
+            avgincome = '{:,.0f}'.format(stats[1]).replace(',', '.')
+            avg_price = '{:,.0f}'.format(stats[3]).replace(',', '.')
+            self.analyse_cars_income_for_week.setText(f'{income}$')
+            self.analyse_cars_avgprice_for_week.setText(f'Цена: {avgincome}$')
+            self.analyse_cars_avghours_for_week.setText(f'Время: {stats[2]}ч')
+            self.analyse_cars_price_per_hours_for_week.setText(f'Цена за час: {avg_price}$')
+            self.analyse_cars_quantity_for_week.setText(f'Количество сделок: {stats[4]}')
+
+    def refresh_cars_stats_for_month(self):
+        id = self.analyse_car_combobox.currentText().split('[ID')[-1].split(']')[0]
+        if self.connect.get_car_stats_for_month(id):
+            stats = self.connect.get_car_stats_for_month(id)
+            income = '{:,.0f}'.format(stats[0]).replace(',', '.')
+            avgincome = '{:,.0f}'.format(stats[1]).replace(',', '.')
+            avg_price = '{:,.0f}'.format(stats[3]).replace(',', '.')
+            self.analyse_cars_income_for_month.setText(f'{income}$')
+            self.analyse_cars_avgprice_for_month.setText(f'Цена: {avgincome}$')
+            self.analyse_cars_avghours_for_month.setText(f'Время: {stats[2]}ч')
+            self.analyse_cars_price_per_hours_for_month.setText(f'Цена за час: {avg_price}$')
+            self.analyse_cars_quantity_for_month.setText(f'Количество сделок: {stats[4]}')
+
+    def refresh_cars_stats_for_alltime(self):
+        id = self.analyse_car_combobox.currentText().split('[ID')[-1].split(']')[0]
+        if self.connect.get_car_stats_for_alltime(id):
+            stats = self.connect.get_car_stats_for_alltime(id)
+            income = '{:,.0f}'.format(stats[0]).replace(',', '.')
+            avgincome = '{:,.0f}'.format(stats[1]).replace(',', '.')
+            avg_price = '{:,.0f}'.format(stats[3]).replace(',', '.')
+            self.analyse_cars_income_for_alltime.setText(f'{income}$')
+            self.analyse_cars_avgprice_for_alltime.setText(f'Цена: {avgincome}$')
+            self.analyse_cars_avghours_for_alltime.setText(f'Время: {stats[2]}ч')
+            self.analyse_cars_price_per_hours_for_alltime.setText(f'Цена за час: {avg_price}$')
+            self.analyse_cars_quantity_for_alltime.setText(f'Количество сделок: {stats[4]}')
+
+    def refresh_analyse_resale_page(self):
+        self.refresh_resale_stats_for_day()
+        self.refresh_resale_stats_for_week()
+        self.refresh_resale_stats_for_month()
+        self.refresh_analyse_carcombo()
+
+    def refresh_analyse_car_page(self):
+        self.refresh_cars_stats_for_week()
+        self.refresh_cars_stats_for_month()
+        self.refresh_cars_stats_for_alltime()

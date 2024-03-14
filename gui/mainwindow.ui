@@ -1100,7 +1100,7 @@ QPushButton:checked{
                 <item>
                  <widget class="QStackedWidget" name="stackedWidget_2">
                   <property name="currentIndex">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <widget class="QWidget" name="analyse_resale_page">
                    <widget class="QFrame" name="frame_6">
@@ -1482,7 +1482,7 @@ border:none;</string>
                       <property name="frameShadow">
                        <enum>QFrame::Raised</enum>
                       </property>
-                      <widget class="QComboBox" name="analyse_car_combobox_">
+                      <widget class="QComboBox" name="analyse_car_combobox">
                        <property name="geometry">
                         <rect>
                          <x>90</x>
@@ -1608,7 +1608,7 @@ border:none;</string>
                               </widget>
                              </item>
                              <item>
-                              <widget class="QLabel" name="analyse_car_quantity_for_week">
+                              <widget class="QLabel" name="analyse_cars_quantity_for_week">
                                <property name="styleSheet">
                                 <string notr="true">border:none;</string>
                                </property>
@@ -1654,6 +1654,19 @@ border:none;</string>
                                </property>
                                <property name="text">
                                 <string>Время:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QLabel" name="analyse_cars_price_per_hours_for_week">
+                               <property name="styleSheet">
+                                <string notr="true">border:none;</string>
+                               </property>
+                               <property name="text">
+                                <string>Цена за час:</string>
+                               </property>
+                               <property name="alignment">
+                                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                                </property>
                               </widget>
                              </item>
@@ -1724,7 +1737,7 @@ border:none;</string>
                               </widget>
                              </item>
                              <item>
-                              <widget class="QLabel" name="analyse_car_quantity_for_month">
+                              <widget class="QLabel" name="analyse_cars_quantity_for_month">
                                <property name="styleSheet">
                                 <string notr="true">border:none;</string>
                                </property>
@@ -1770,6 +1783,19 @@ border:none;</string>
                                </property>
                                <property name="text">
                                 <string>Время:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QLabel" name="analyse_cars_price_per_hours_for_month">
+                               <property name="styleSheet">
+                                <string notr="true">border:none;</string>
+                               </property>
+                               <property name="text">
+                                <string>Цена за час:</string>
+                               </property>
+                               <property name="alignment">
+                                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                                </property>
                               </widget>
                              </item>
@@ -1840,7 +1866,7 @@ border:none;</string>
                               </widget>
                              </item>
                              <item>
-                              <widget class="QLabel" name="analyse_car_quantity_for_alltime">
+                              <widget class="QLabel" name="analyse_cars_quantity_for_alltime">
                                <property name="styleSheet">
                                 <string notr="true">border:none;</string>
                                </property>
@@ -1886,6 +1912,19 @@ border:none;</string>
                                </property>
                                <property name="text">
                                 <string>Время:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QLabel" name="analyse_cars_price_per_hours_for_alltime">
+                               <property name="styleSheet">
+                                <string notr="true">border:none;</string>
+                               </property>
+                               <property name="text">
+                                <string>Цена за час:</string>
+                               </property>
+                               <property name="alignment">
+                                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                                </property>
                               </widget>
                              </item>
